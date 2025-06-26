@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Ülke Seç";
+    Layout = "_Layout";
+    var countries = ViewBag.Countries as IEnumerable<CountryInfoService.tCountryCodeAndName>;
+}
+
+<h2>Ülke Seçin</h2>
+
+<form asp-action="GetCapital" method="post">
+    <select name="code" class="form-select mb-3">
+        @foreach (var c in countries)
+        {
+            <option value="@c.sISOCode">@c.sName (@c.sISOCode)</option>
+        }
+    </select>
+    <button class="btn btn-primary">Başkent Göster</button>
+</form>
+
+@if (ViewBag.Capital != null)
+{
+    <div class="alert alert-success mt-3">
+        Başkent: <strong>@ViewBag.Capital</strong>
+    </div>
+}
